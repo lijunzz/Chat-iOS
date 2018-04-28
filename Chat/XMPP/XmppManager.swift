@@ -259,6 +259,42 @@ extension XmppManager: XMPPStreamDelegate {
             
             NotificationCenter.default.post(name: XmppManager.NotificationMessage, object: self, userInfo: userInfo)
         }
+        
+        let outMessage = XMPPMessage(type: "chat", to: message.from())
+        outMessage?.addBody(message.body())
+        
+        sender.send(outMessage)
+    }
+    
+}
+
+extension XmppManager: XMPPRosterDelegate {
+    
+    func xmppRoster(_ sender: XMPPRoster!, didReceivePresenceSubscriptionRequest presence: XMPPPresence) {
+        "\(#function)".log()
+        
+        let user = xmppRosterStorage.user(for: presence.from(), xmppStream: xmppStream, managedObjectContext: xmppRosterStorage.mainThreadManagedObjectContext)
+        
+        let displayName = user?.displayName ?? ""
+        let jidStrBare = presence.fromStr() ?? ""
+        let body: String
+        
+        guard !displayName.isEmpty && !jidStrBare.isEmpty else {
+            return
+        }
+        
+        if displayName != jidStrBare {
+            body = "Buddy request from \(displayName) <\(jidStrBare)>"
+        } else {
+            body = "Buddy request from \(displayName)"
+        }
+        if UIApplication.shared.applicationState == .active {
+            // AlertUtils.showAlert(UIViewController, title: displayName, body: body, style: .alert)
+            "\(#function): \(body)".log()
+        } else {
+            // We are not active, so use a local notification instead
+            NotificationsUtils.local(title: displayName, body: body, categoryIdentifier: #function, requestIdentifier: #function)
+        }
     }
     
 }

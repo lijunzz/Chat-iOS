@@ -20,7 +20,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let xmppManager = XmppManager.shared
+    private let xmppManager = XmppManager.shared
+    
+    private let imuiMessageCollectionView = IMUIMessageCollectionView()
+    private let imuiInputView = IMUIInputView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +31,30 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(receivedMessage(notification:)), name: XmppManager.NotificationMessage, object: xmppManager)
         
-        let xmppProfile = XmppProfile(hostName: "talk.google.com", jid: "user@gmail.com/xmppframework", password: "password")
+        imuiMessageCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        imuiMessageCollectionView.delegate = self
+        view.addSubview(imuiMessageCollectionView)
         
+        imuiInputView.translatesAutoresizingMaskIntoConstraints = false
+        imuiInputView.delegate = self
+        view.addSubview(imuiInputView)
+        
+        if #available(iOS 11.0, *) {
+            let guide = view.safeAreaLayoutGuide
+            
+            imuiMessageCollectionView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+            imuiMessageCollectionView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+            imuiMessageCollectionView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+            imuiMessageCollectionView.bottomAnchor.constraint(equalTo: imuiInputView.topAnchor).isActive = true
+            
+            imuiInputView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+            imuiInputView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+            imuiInputView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+            imuiInputView.heightAnchor.constraint(equalToConstant: 81)
+        }
+        
+        /// 连接聊天服务器。
+        let xmppProfile = XmppProfile(hostName: "talk.google.com", jid: "user@gmail.com/xmppframework", password: "password")
         _ = xmppManager.connect(xmppProfile)
     }
     
@@ -51,4 +76,24 @@ class ViewController: UIViewController {
     }
     
 }
+
+extension ViewController: IMUIMessageMessageCollectionViewDelegate {
+    
+    func messageCollectionView(_ willBeginDragging: UICollectionView) {
+        imuiInputView.hideFeatureView()
+    }
+    
+}
+
+extension ViewController: IMUIInputViewDelegate {
+    
+    /// IMUIInputView 发送消息。
+    func sendTextMessage(_ messageText: String) {
+        let message = MessageModel(text: messageText, out: true)
+        
+        imuiMessageCollectionView.appendMessage(with: message)
+    }
+    
+}
+
 

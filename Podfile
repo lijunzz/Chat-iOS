@@ -9,5 +9,6 @@ target 'Chat' do
 
   # Pods for Chat
   pod 'XMPPFramework', '3.7.0'
+  pod 'AuroraIMUI'
 
 end
