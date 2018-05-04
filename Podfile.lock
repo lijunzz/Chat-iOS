@@ -1,0 +1,32 @@
+PODS:
+  - AuroraIMUI (0.6.7)
+  - CocoaAsyncSocket (7.6.3)
+  - CocoaLumberjack (3.4.1):
+    - CocoaLumberjack/Default (= 3.4.1)
+    - CocoaLumberjack/Extensions (= 3.4.1)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Extensions (3.4.1):
+    - CocoaLumberjack/Default
+  - KissXML (5.2.2)
+  - Toolbox (0.1.1)
+  - XMPPFramework (3.7.0):
+    - CocoaAsyncSocket (~> 7.6.0)
+    - CocoaLumberjack
+    - KissXML (~> 5.2.0)
+
+DEPENDENCIES:
+  - AuroraIMUI
+  - Toolbox (= 0.1.1)
+  - XMPPFramework (= 3.7.0)
+
+SPEC CHECKSUMS:
+  AuroraIMUI: 8e3c55295bd2484259743c1bb7955d2ee86fac7e
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  KissXML: 4418f32138aec43797891845d682b00fc8cd4677
+  Toolbox: 7ed2e444ac5e939d4ceb35d0c65980d06b1c51d4
+  XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
+
+PODFILE CHECKSUM: 5b1314bf2f8f58b6d1702596b39680e1d9162e37
+
+COCOAPODS: 1.4.0

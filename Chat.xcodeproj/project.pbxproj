@@ -13,8 +13,6 @@
 		1523E34320932C6800CF9829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1523E34220932C6800CF9829 /* Assets.xcassets */; };
 		1523E34620932C6800CF9829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1523E34420932C6800CF9829 /* LaunchScreen.storyboard */; };
 		1523E35020933E1B00CF9829 /* XmppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523E34F20933E1B00CF9829 /* XmppManager.swift */; };
-		1523E35B2093433900CF9829 /* Toolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1523E351209342B200CF9829 /* Toolbox.framework */; };
-		1523E35C2093433900CF9829 /* Toolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1523E351209342B200CF9829 /* Toolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1586E52D2094111C002D879F /* XmppProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586E52C2094111C002D879F /* XmppProfile.swift */; };
 		1586E52F209442AB002D879F /* XmppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586E52E209442AB002D879F /* XmppMessage.swift */; };
 		1586E6E220946EDE002D879F /* IMUIAudioPlayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586E68520946EDD002D879F /* IMUIAudioPlayerHelper.swift */; };
@@ -98,20 +96,6 @@
 		1586E7342094871B002D879F /* MessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586E7332094871B002D879F /* MessageUser.swift */; };
 		FA1CBB12A1F5931720A09D8E /* Pods_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB77A8E9C3E0380F3E9E4055 /* Pods_Chat.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1523E35D2093433900CF9829 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1523E35C2093433900CF9829 /* Toolbox.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		147495A28A95A8FB495CDF98 /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,7 +199,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1523E35B2093433900CF9829 /* Toolbox.framework in Frameworks */,
 				FA1CBB12A1F5931720A09D8E /* Pods_Chat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,7 +543,6 @@
 				1523E33620932C6700CF9829 /* Resources */,
 				A06C56405667059F8D3FE766 /* [CP] Embed Pods Frameworks */,
 				42B6E78FE18381D99E91B5BD /* [CP] Copy Pods Resources */,
-				1523E35D2093433900CF9829 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -673,16 +655,20 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Chat/Pods-Chat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AuroraIMUI/AuroraIMUI.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/Toolbox/Toolbox.framework",
 				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AuroraIMUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toolbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XMPPFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,10 +903,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Chat/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.junzz.app.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -940,10 +923,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Chat/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.junzz.app.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
